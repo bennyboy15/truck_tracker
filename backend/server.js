@@ -5,6 +5,8 @@ import cookieParser from "cookie-parser";
 import path from "path";
 import { connectDB } from "./db/connectDB.js";
 import authRoutes from "./routes/auth.route.js";
+import technicianRoutes from "./routes/technician.route.js";
+import truckRoutes from "./routes/truck.route.js";
 
 dotenv.config();
 const app = express();
@@ -20,6 +22,8 @@ app.use(cookieParser()); // allows us to parse incoming cookies
 
 // -- ROUTES --
 app.use("/api/auth", authRoutes);
+app.use("/api/technician", technicianRoutes);
+app.use("/api/truck", truckRoutes);
 
 if (process.env.NODE_ENV === "production") {
 	app.use(express.static(path.join(__dirname, "/frontend/dist")));
