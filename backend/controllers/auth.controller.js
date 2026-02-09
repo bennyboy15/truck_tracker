@@ -5,7 +5,7 @@ import {generateTokenAndSetCookie} from "../utils/generateTokenAndSetCookie.js"
 import crypto from "crypto";
 
 export async function signup(req,res){
-    const { email, password, name } = req.body;
+    const { email, password, name } = req.validatedData;
 
 	try {
 		if (!email || !password || !name) {
@@ -49,9 +49,9 @@ export async function signup(req,res){
 
 export async function login(req,res){
     try {
-        const {email, password} = req.body;
+        const {email, password} = req.validatedData;
 
-        if (!email || !password) return res.status(400).json({success:false, message:"Email and password are required!"});
+        //if (!email || !password) return res.status(400).json({success:false, message:"Email and password are required!"});
 
         const user = await User.findOne({email});
         if (!user) return res.status(404).json({success:false, message:"Invalid credentials"});
