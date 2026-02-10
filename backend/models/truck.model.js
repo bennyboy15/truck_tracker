@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const technicianSchema = new mongoose.Schema({
+const truckSchema = new mongoose.Schema({
 
     model: {
         type: mongoose.Schema.Types.ObjectId,
@@ -28,6 +28,6 @@ const technicianSchema = new mongoose.Schema({
 
 }, { timestamps: true });
 
-const Technician = mongoose.model("Technician", technicianSchema);
+const Truck = mongoose.model("Truck", truckSchema);
 
-export default Technician;
+export default Truck;
