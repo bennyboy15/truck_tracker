@@ -6,7 +6,7 @@ export async function getAllTechnicians(req,res){
         return res.status(200).json(techs);
     } catch (error) {
         console.log("ERROR: getAllTechnicians @ technician controller");
-        throw new Error("Internal Server Error", 500);
+        return res.status(500).json({message:"Internal Server Error"});
     }
 }
 
@@ -19,7 +19,7 @@ export async function getTechnicianById(req,res){
         return res.status(200).json(tech);
     } catch (error) {
         console.log("ERROR: getTechnicianById @ technician controller");
-        throw new Error("Internal Server Error", 500);
+        return res.status(500).json({message:"Internal Server Error"});
     }
 }
 
@@ -34,6 +34,6 @@ export async function createTechnician(req,res){
         return res.status(200).json(newTech);
     } catch (error) {
         console.log("ERROR: createTechnician @ technician controller");
-        throw new Error("Internal Server Error", 500);
+        return res.status(500).json({message:"Internal Server Error"});
     } 
 }

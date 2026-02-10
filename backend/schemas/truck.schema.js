@@ -8,3 +8,14 @@ export const truckSchema = z.object({
   stock: z.string().trim().min(1, "Stock is required"),
   registration: z.string().trim().min(1, "Registration is required"),
 });
+
+export const truckMakeSchema = z.object({
+  name: z.string().trim().min(1, "Name is required"),
+  code: z.string().trim().min(2, "Code is at least 2 characters"),
+});
+
+export const truckModelSchema = z.object({
+  name: z.string().trim().min(1, "Name is required"),
+  category: z.string().trim().min(1, "Category is required"),
+  make: z.string().trim().min(1, "Truck make is required"),
+});

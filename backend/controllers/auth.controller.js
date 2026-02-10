@@ -9,7 +9,7 @@ export async function signup(req,res){
 
 	try {
 		if (!email || !password || !name) {
-			throw new Error("All fields are required");
+			return res.status(400).json({message:"All fields are required"});
 		}
 
 		const userAlreadyExists = await User.findOne({ email });

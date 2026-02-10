@@ -1,15 +1,15 @@
-import Truck from "../models/truck.model.js";
-import TruckModel from "../models/truckModel.model.js";
+import Truck from "../models/truck/truck.model.js";
+import TruckModel from "../models/truck/truckModel.model.js";
 import Customer from "../models/customer.model.js";
 import User from "../models/user.model.js";
 
 export async function getAllTrucks(req, res) {
     try {
-        const trucks = await Trucks.find();
+        const trucks = await Truck.find();
         return res.status(200).json(trucks);
     } catch (error) {
         console.log("ERROR: getAllTrucks @ truck controller");
-        throw new Error("Internal Server Error", 500);
+        return res.status(500).json({ error: "Internal Server Error" });
     }
 }
 
@@ -20,7 +20,7 @@ export async function getTruckById(req, res) {
         return res.status(200).json(truck);
     } catch (error) {
         console.log("ERROR: getTruckById @ truck controller");
-        throw new Error("Internal Server Error", 500);
+        return res.status(500).json({ error: "Internal Server Error" });
     }
 }
 
@@ -47,7 +47,7 @@ export async function createTruck(req, res) {
 
     } catch (error) {
         console.log("ERROR: createTruck @ truck controller");
-        throw new Error("Internal Server Error", 500);
+        return res.status(500).json({ error: "Internal Server Error" });
     }
 }
 

@@ -7,6 +7,8 @@ import { connectDB } from "./db/connectDB.js";
 import authRoutes from "./routes/auth.route.js";
 import technicianRoutes from "./routes/technician.route.js";
 import truckRoutes from "./routes/truck.route.js";
+import truckMakeRoutes from "./routes/truckMake.route.js";
+import truckModelRoutes from "./routes/truckModel.route.js";
 
 dotenv.config();
 const app = express();
@@ -24,6 +26,8 @@ app.use(cookieParser()); // allows us to parse incoming cookies
 app.use("/api/auth", authRoutes);
 app.use("/api/technician", technicianRoutes);
 app.use("/api/truck", truckRoutes);
+app.use("/api/truck_make", truckMakeRoutes);
+app.use("/api/truck_model", truckModelRoutes);
 
 if (process.env.NODE_ENV === "production") {
 	app.use(express.static(path.join(__dirname, "/frontend/dist")));
