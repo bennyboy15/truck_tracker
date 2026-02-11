@@ -15,7 +15,7 @@ export async function getAllTrucks(req, res) {
 
 export async function getTruckById(req, res) {
     try {
-        const truck = await Trucks.findById(req.params.id);
+        const truck = await Truck.findById(req.params.id);
         if (!truck) return res.status(404).json({ message: "Truck not found" });
         return res.status(200).json(truck);
     } catch (error) {

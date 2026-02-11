@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useAuthStore } from "../store/authStore";
 import { formatDate } from "../utils/date";
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
 	const { user, logout } = useAuthStore();
@@ -20,6 +21,10 @@ const HomePage = () => {
 			<h2 className='text-3xl font-bold mb-6 text-center bg-gradient-to-r from-green-400 to-emerald-600 text-transparent bg-clip-text'>
 				Dashboard
 			</h2>
+
+			<Link to="/data" className='w-full py-3 px-4 bg-gradient-to-r from-green-500 to-emerald-600 text-white 
+				font-bold rounded-lg shadow-lg hover:from-green-600 hover:to-emerald-700
+				 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-gray-900'>Nav to data</Link>
 
 			<div className='space-y-6'>
 				<motion.div

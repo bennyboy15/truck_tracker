@@ -11,7 +11,7 @@ export function protectRoute(req,res,next) {
         req.userId = decoded.userId;
         next();
     } catch (error) {
-        console.log("Error in verifyToken", error)
+        console.log("Error in protectRoute", error)
         return res.status(500).json({success:false, message:"Server Error"});
     }
 }

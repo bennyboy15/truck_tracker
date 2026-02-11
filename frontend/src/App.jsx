@@ -4,6 +4,7 @@ import SignupPage from "./pages/SignupPage.jsx"
 import LoginPage from "./pages/LoginPage.jsx"
 import VerifyEmailPage from "./pages/VerifyEmailPage.jsx"
 import HomePage from "./pages/HomePage.jsx"
+import DataPage from "./pages/DataPage.jsx"
 import { Toaster } from "react-hot-toast"
 import { useAuthStore } from "./store/authStore.js"
 import { useEffect } from "react"
@@ -34,12 +35,10 @@ function RedirectAuthenticatedUser({children}) {
 
 function App() {
 
-  const { isCheckingAuth, checkAuth, isAuthenticated, user } = useAuthStore();
+  const { isCheckingAuth, checkAuth } = useAuthStore();
 
   useEffect(() => {
     checkAuth();
-    console.log(isAuthenticated);
-    console.log(user);
   },[checkAuth])
 
   if (isCheckingAuth) return <LoadingSpinner/>
@@ -54,6 +53,9 @@ function App() {
         <Route path='/' element={<ProtectedRoute><HomePage/></ProtectedRoute>}/>
         <Route path='/signup' element={<RedirectAuthenticatedUser><SignupPage/></RedirectAuthenticatedUser>}/>
         <Route path='/login' element={<RedirectAuthenticatedUser><LoginPage/></RedirectAuthenticatedUser>}/>
+
+        <Route path='/data' element={<ProtectedRoute><DataPage/></ProtectedRoute>}/>
+
         <Route path='/verify-email' element={<VerifyEmailPage/>}/>
         <Route path='/forgot-password' element={<RedirectAuthenticatedUser><ForgotPasswordPage/></RedirectAuthenticatedUser>}/>
         <Route path='/reset-password/:token' element={<RedirectAuthenticatedUser><ResetPasswordPage/></RedirectAuthenticatedUser>}/>
