@@ -2,7 +2,7 @@ import TruckModel from "../models/truck/truckModel.model.js";
 
 export async function getAllTruckModels(req, res) {
     try {
-        const truckModels = await TruckModel.find();
+        const truckModels = await TruckModel.find().populate('make', 'name');
         return res.status(200).json(truckModels);
     } catch (error) {
         console.log("ERROR: getAllTruckModels @ truckMake controller");

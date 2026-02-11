@@ -13,7 +13,7 @@ const LoginPage = () => {
 
 	const { login, isLoading, error } = useAuthStore();
 
-	const navigate = useNavigate()
+	const navigate = useNavigate();
 
 	const handleLogin = async (e) => {
 		e.preventDefault();

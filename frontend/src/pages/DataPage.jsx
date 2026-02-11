@@ -1,35 +1,23 @@
-import { Alert } from 'antd';
-import { useQuery } from "@tanstack/react-query";
-import axiosInstance from "../utils/axios.js";
-import TruckMakeTable from '../components/truck/TruckMakeTable.jsx';
+import TruckMakeTable from '../components/truck/truckMake/TruckMakeTable.jsx';
+import TruckMakeCreate from '../components/truck/truckMake/TruckMakeCreate.jsx';
+import TruckModelTable from '../components/truck/truckModel/TruckModelTable.jsx';
+import TruckModelCreate from '../components/truck/truckModel/TruckModelCreate.jsx';
 
 function DataPage() {
-    const { isPending, error, data } = useQuery({
-        queryKey: ['truckMakes'],
-        queryFn: async () => {
-            const { data } = await axiosInstance.get("/truck_make");
-            return data;
-        }
-    });
-
-    const columns = [
-        {
-            title: 'Make Name',
-            dataIndex: 'name',
-            key: 'name',
-            sorter: (a, b) => a.name.localeCompare(b.name),
-        },
-        {
-            title: 'Code',
-            dataIndex: 'code',
-            key: 'code',
-        },
-    ];
-
-    if (error) return <Alert title="Error" description={error.message} type="error" showIcon />;
 
     return (
-        <TruckMakeTable columns={columns} data={data} isPending={isPending}/>
+        <div className='flex gap-10'>
+            {/* TRUCK MAKE */}
+            <div className="flex flex-col gap-8">
+                <TruckMakeTable />
+                <TruckMakeCreate />
+            </div>
+            {/* TRUCK MODEL */}
+            <div className="flex flex-col gap-8">
+                <TruckModelTable />
+                <TruckModelCreate />
+            </div>
+        </div>
     );
 }
 
