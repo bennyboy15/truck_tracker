@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Tabs, Row, Col } from 'antd';
 import { UserOutlined, ToolOutlined, CarOutlined, ApartmentOutlined, DatabaseOutlined } from '@ant-design/icons';
 import { useQuery } from '@tanstack/react-query';
@@ -40,58 +40,61 @@ function DataPage() {
     const truckModels = useCount('/truck_model', 'truckModels');
     const trucks = useCount('/truck', 'trucks');
 
-    const tabItems = [
-        {
-            key: 'customers',
-            label: 'Customers',
-            children: (
-                <div className="flex flex-col gap-6">
-                    <CustomerTable />
-                    <CustomerCreate />
-                </div>
-            ),
-        },
-        {
-            key: 'technicians',
-            label: 'Technicians',
-            children: (
-                <div className="flex flex-col gap-6">
-                    <TechnicianTable />
-                    <TechnicianCreate />
-                </div>
-            ),
-        },
-        {
-            key: 'truck_makes',
-            label: 'Truck Makes',
-            children: (
-                <div className="flex flex-col gap-6">
-                    <TruckMakeTable />
-                    <TruckMakeCreate />
-                </div>
-            ),
-        },
-        {
-            key: 'truck_models',
-            label: 'Truck Models',
-            children: (
-                <div className="flex flex-col gap-6">
-                    <TruckModelTable />
-                    <TruckModelCreate />
-                </div>
-            ),
-        },
-        {
-            key: 'trucks',
-            label: 'Trucks',
-            children: (
-                <div className="flex flex-col gap-6">
-                    <TruckTable />
-                    <TruckCreate />
-                </div>
-            ),
-        },
-    ];
+    const tabItems = useMemo(
+        () => [
+            {
+                key: 'customers',
+                label: 'Customers',
+                children: (
+                    <div className="flex flex-col gap-6" key="customers">
+                        <CustomerTable />
+                        <CustomerCreate />
+                    </div>
+                ),
+            },
+            {
+                key: 'technicians',
+                label: 'Technicians',
+                children: (
+                    <div className="flex flex-col gap-6" key="technicians">
+                        <TechnicianTable />
+                        <TechnicianCreate />
+                    </div>
+                ),
+            },
+            {
+                key: 'truck_makes',
+                label: 'Truck Makes',
+                children: (
+                    <div className="flex flex-col gap-6" key="truck_makes">
+                        <TruckMakeTable />
+                        <TruckMakeCreate />
+                    </div>
+                ),
+            },
+            {
+                key: 'truck_models',
+                label: 'Truck Models',
+                children: (
+                    <div className="flex flex-col gap-6" key="truck_models">
+                        <TruckModelTable />
+                        <TruckModelCreate />
+                    </div>
+                ),
+            },
+            {
+                key: 'trucks',
+                label: 'Trucks',
+                children: (
+                    <div className="flex flex-col gap-6" key="trucks">
+                        <TruckTable />
+                        <TruckCreate />
+                    </div>
+                ),
+            },
+        ],
+        []
+    );
 
     return (
         <PageLayout>
@@ -155,6 +158,7 @@ function DataPage() {
                     onChange={setActiveKey}
                     items={tabItems}
                     size="large"
+                    destroyOnHidden={false}
                 />
             </SectionCard>
         </PageLayout>

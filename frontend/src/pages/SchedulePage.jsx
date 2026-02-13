@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
     Input,
     Tabs,
@@ -54,6 +54,7 @@ function toTruckPayload(truck, overrides = {}) {
 }
 
 function SchedulePage() {
+    const navigate = useNavigate();
     const queryClient = useQueryClient();
     const [statusFilter, setStatusFilter] = useState("all");
     const [search, setSearch] = useState("");
@@ -249,7 +250,7 @@ function SchedulePage() {
                         <EmptyState
                             description="Select a truck from the list to view details and actions."
                             label="View all trucks in Data"
-                            onAction={() => (window.location.href = "/data")}
+                            onAction={() => navigate("/data")}
                         />
                     ) : (
                         <>

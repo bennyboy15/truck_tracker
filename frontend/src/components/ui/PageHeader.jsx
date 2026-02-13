@@ -24,7 +24,7 @@ function PageHeader({ title, subtitle, breadcrumbs, extra, level = 3 }) {
                 />
             )}
             <div className="flex flex-wrap items-start justify-between gap-4">
-                <Space direction="vertical" size={0}>
+                <Space orientation="vertical" size={0}>
                     <Title level={level} style={{ margin: 0 }}>
                         {title}
                     </Title>

@@ -65,7 +65,7 @@ function TruckMakeTable() {
         <Card>
             <Title level={4}>Truck Makes</Title>
             <Table
-                dataSource={truckMakes}
+                dataSource={Array.isArray(truckMakes) ? truckMakes : []}
                 columns={truckMakeColumns}
                 loading={isPending}
                 rowKey="_id"

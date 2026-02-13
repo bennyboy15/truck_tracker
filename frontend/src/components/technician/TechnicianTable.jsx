@@ -35,7 +35,7 @@ function TechnicianTable() {
         <Card>
             <Title level={4}>Technicians</Title>
             <Table
-                dataSource={technicians}
+                dataSource={Array.isArray(technicians) ? technicians : []}
                 columns={columns}
                 loading={isPending}
                 rowKey="_id"

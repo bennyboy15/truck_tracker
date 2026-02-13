@@ -146,7 +146,7 @@ const HomePage = () => {
 							/>
 						)}
 						<Table
-							dataSource={trucks}
+							dataSource={Array.isArray(trucks) ? trucks : []}
 							columns={truckColumns}
 							rowKey="_id"
 							loading={isPending}

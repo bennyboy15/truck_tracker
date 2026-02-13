@@ -5,12 +5,12 @@ const API_URL = import.meta.env.MODE === "development" ? "http://localhost:5000/
 axios.defaults.withCredentials = true; // Puts cookies into request header
 
 export const useAuthStore = create((set) => ({
-    user:null,
-    isAuthenticated:false,
-    error:null,
+    user: null,
+    isAuthenticated: false,
+    error: null,
     isLoading: false,
-    isCheckingAuth:false,
-    message:null,
+    isCheckingAuth: true, // start true so we show loading until first checkAuth completes (fixes redirect on refresh)
+    message: null,
 
     signup: async function (email, password, name) {
         set({isLoading:true, error:null});
@@ -71,7 +71,7 @@ export const useAuthStore = create((set) => ({
 			const response = await axios.get(`${API_URL}/check-auth`);
 			set({ user: response.data.user, isAuthenticated: true, isCheckingAuth: false });
 		} catch (error) {
-			set({ error: null, isCheckingAuth: false, isAuthenticated: false });
+			set({ user: null, error: null, isCheckingAuth: false, isAuthenticated: false });
 		}
 	},
 

@@ -9,7 +9,7 @@ const { Title } = Typography;
 function SectionCard({ title, subtitle, extra, children, className = '', ...cardProps }) {
     const header = (title || extra) ? (
         <div className="flex flex-wrap items-center justify-between gap-2">
-            <Space direction="vertical" size={0}>
+            <Space orientation="vertical" size={0}>
                 {title && <Title level={5} style={{ margin: 0 }}>{title}</Title>}
                 {subtitle && (
                     <span className="text-neutral-500 text-sm">{subtitle}</span>

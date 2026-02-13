@@ -117,7 +117,7 @@ function TruckTable() {
             <Card>
                 <Title level={4}>Trucks</Title>
                 <Table
-                    dataSource={trucks}
+                    dataSource={Array.isArray(trucks) ? trucks : []}
                     columns={columns}
                     loading={isPending}
                     rowKey="_id"

@@ -65,7 +65,7 @@ function CustomerTable() {
         <Card>
             <Title level={4}>Customers</Title>
             <Table
-                dataSource={customers}
+                dataSource={Array.isArray(customers) ? customers : []}
                 columns={columns}
                 loading={isPending}
                 rowKey="_id"
