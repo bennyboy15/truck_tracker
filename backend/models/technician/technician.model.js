@@ -9,6 +9,14 @@ const technicianSchema = new mongoose.Schema({
     techNo: {
         type: Number,
     },
+    team: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "TechnicianTeam"
+    },
+    isActive: {
+        type: Boolean,
+        default: true
+    },
     
 }, {timestamps: true});
 
