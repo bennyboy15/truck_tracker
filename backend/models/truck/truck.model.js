@@ -24,7 +24,15 @@ const truckSchema = new mongoose.Schema({
     },
     registration: {
         type: String,
-    }
+    },
+    status: {
+        type: String,
+        enum: ["active", "upcoming", "completed"],
+        default: "active",
+    },
+    deliveryDate: {
+        type: Date,
+    },
 
 }, { timestamps: true });
 

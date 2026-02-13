@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Layout, Menu, Typography, Dropdown, Space, Button, ConfigProvider } from 'antd';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {
+    CalendarOutlined,
     DatabaseOutlined,
     HomeOutlined,
     UserOutlined,
@@ -35,6 +36,7 @@ const theme = {
 
 const navItems = [
     { key: '/', icon: <HomeOutlined />, label: 'Dashboard' },
+    { key: '/schedule', icon: <CalendarOutlined />, label: 'Schedule' },
     { key: '/data', icon: <DatabaseOutlined />, label: 'Data' },
 ];
 

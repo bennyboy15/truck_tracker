@@ -5,7 +5,15 @@ import User from "../models/user.model.js";
 
 export async function getAllTrucks(req, res) {
     try {
-        const trucks = await Truck.find();
+        const { status } = req.query;
+        const filter = {};
+        if (status && ["active", "upcoming", "completed"].includes(status)) {
+            filter.status = status;
+        }
+        const trucks = await Truck.find(filter)
+            .populate({ path: "model", select: "name category", populate: { path: "make", select: "name" } })
+            .populate("customer", "name email")
+            .populate("salesman", "name");
         return res.status(200).json(trucks);
     } catch (error) {
         console.log("ERROR: getAllTrucks @ truck controller");
@@ -15,7 +23,10 @@ export async function getAllTrucks(req, res) {
 
 export async function getTruckById(req, res) {
     try {
-        const truck = await Truck.findById(req.params.id);
+        const truck = await Truck.findById(req.params.id)
+            .populate({ path: "model", select: "name category", populate: { path: "make", select: "name" } })
+            .populate("customer", "name email")
+            .populate("salesman", "name");
         if (!truck) return res.status(404).json({ message: "Truck not found" });
         return res.status(200).json(truck);
     } catch (error) {
@@ -26,7 +37,7 @@ export async function getTruckById(req, res) {
 
 export async function createTruck(req, res) {
     try {
-        const { model, customer, salesman, chassis, stock, registration } = req.validatedData;
+        const { model, customer, salesman, chassis, stock, registration, status, deliveryDate } = req.validatedData;
 
         // Run all existence checks in parallel
         const [foundModel, foundCustomer, foundSalesman] = await Promise.all([
@@ -40,7 +51,7 @@ export async function createTruck(req, res) {
         if (!foundCustomer) return res.status(404).json({ message: "Customer does not exist" });
         if (!foundSalesman) return res.status(404).json({ message: "Salesman does not exist" });
 
-        const newTruck = new Truck({ model, customer, salesman, chassis, stock, registration });
+        const newTruck = new Truck({ model, customer, salesman, chassis, stock, registration, status, deliveryDate });
         await newTruck.save();
 
         return res.status(201).json({ message: "Successfully created new truck", truck: newTruck });
