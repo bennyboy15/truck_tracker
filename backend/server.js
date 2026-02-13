@@ -10,6 +10,11 @@ import technicianRoutes from "./routes/technician.route.js";
 import truckRoutes from "./routes/truck.route.js";
 import truckMakeRoutes from "./routes/truckMake.route.js";
 import truckModelRoutes from "./routes/truckModel.route.js";
+import worksheetRoutes from "./routes/worksheet.route.js";
+import worksheetOptionRoutes from "./routes/worksheetOption.route.js";
+import headingRoutes from "./routes/heading.route.js";
+import sectionRoutes from "./routes/section.route.js";
+import optionRoutes from "./routes/option.route.js";
 
 dotenv.config();
 const app = express();
@@ -30,6 +35,11 @@ app.use("/api/technician", technicianRoutes);
 app.use("/api/truck", truckRoutes);
 app.use("/api/truck_make", truckMakeRoutes);
 app.use("/api/truck_model", truckModelRoutes);
+app.use("/api/worksheet", worksheetRoutes);
+app.use("/api/worksheet_option", worksheetOptionRoutes);
+app.use("/api/heading", headingRoutes);
+app.use("/api/section", sectionRoutes);
+app.use("/api/option", optionRoutes);
 
 if (process.env.NODE_ENV === "production") {
 	app.use(express.static(path.join(__dirname, "/frontend/dist")));
