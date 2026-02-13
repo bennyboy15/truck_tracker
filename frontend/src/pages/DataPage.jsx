@@ -22,13 +22,14 @@ import TruckCreate from '../components/truck/TruckCreate.jsx';
 
 function useCount(endpoint, queryKey) {
     const { data, isLoading } = useQuery({
-        queryKey: [queryKey],
+        queryKey: [queryKey, 'count'],
         queryFn: async () => {
             const { data: list } = await axiosInstance.get(endpoint);
             return Array.isArray(list) ? list.length : 0;
         },
     });
-    return { count: data ?? 0, isLoading };
+    const count = typeof data === 'number' ? data : 0;
+    return { count, isLoading };
 }
 
 function DataPage() {

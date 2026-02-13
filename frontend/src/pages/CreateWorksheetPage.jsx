@@ -189,11 +189,11 @@ function CreateWorksheetPage() {
                     subtitle="Select the options to include on this worksheet. Grouped by section and heading."
                 >
                     {sectionsLoading || headingsLoading || optionsLoading ? (
-                        <Spin tip="Loading options..." />
+                        <Spin description="Loading options..." />
                     ) : optionTree.length === 0 ? (
                         <Alert
                             type="info"
-                            message="No options available"
+                            title="No options available"
                             description="Add sections, headings, and options in Data (or run the worksheet seed script) first."
                         />
                     ) : (
