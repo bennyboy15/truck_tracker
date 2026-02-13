@@ -9,6 +9,7 @@
     "dev:frontend": "npm run dev --prefix frontend",
     "dev": "concurrently \"nodemon backend/server.js\" \"cd frontend && npm run dev\"",
     "seed": "node backend/scripts/seed.js",
+    "seed:worksheet": "node backend/scripts/seedWorksheet.js",
     "start": "cross-env NODE_ENV=production node backend/server.js",
     "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend"
   },

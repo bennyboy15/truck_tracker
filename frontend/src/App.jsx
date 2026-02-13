@@ -6,6 +6,7 @@ import VerifyEmailPage from "./pages/VerifyEmailPage.jsx"
 import HomePage from "./pages/HomePage.jsx"
 import DataPage from "./pages/DataPage.jsx"
 import SchedulePage from "./pages/SchedulePage.jsx"
+import CreateWorksheetPage from "./pages/CreateWorksheetPage.jsx"
 import { Toaster } from "react-hot-toast"
 import { useAuthStore } from "./store/authStore.js"
 import { useEffect } from "react"
@@ -38,7 +39,7 @@ function RedirectAuthenticatedUser({children}) {
 function App() {
   const { isCheckingAuth, checkAuth } = useAuthStore();
   const location = useLocation();
-  const isAppRoute = ['/', '/data', '/schedule'].includes(location.pathname);
+  const isAppRoute = ['/', '/data', '/schedule', '/worksheet/create'].includes(location.pathname);
 
   useEffect(() => {
     checkAuth();
@@ -68,6 +69,7 @@ function App() {
         <Route path="/login" element={<RedirectAuthenticatedUser><LoginPage /></RedirectAuthenticatedUser>} />
         <Route path="/data" element={<ProtectedRoute><AppLayout><DataPage /></AppLayout></ProtectedRoute>} />
         <Route path="/schedule" element={<ProtectedRoute><AppLayout><SchedulePage /></AppLayout></ProtectedRoute>} />
+        <Route path="/worksheet/create" element={<ProtectedRoute><AppLayout><CreateWorksheetPage /></AppLayout></ProtectedRoute>} />
         <Route path="/verify-email" element={<VerifyEmailPage />} />
         <Route path="/forgot-password" element={<RedirectAuthenticatedUser><ForgotPasswordPage /></RedirectAuthenticatedUser>} />
         <Route path="/reset-password/:token" element={<RedirectAuthenticatedUser><ResetPasswordPage /></RedirectAuthenticatedUser>} />

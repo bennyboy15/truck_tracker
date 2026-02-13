@@ -1,4 +1,4 @@
-import Technician from "../models/technician.model.js";
+import Technician from "../models/technician/technician.model.js";
 
 export async function getAllTechnicians(req,res){
     try {

@@ -9,6 +9,7 @@ import {
     LogoutOutlined,
     DownOutlined,
     MenuOutlined,
+    FileAddOutlined,
 } from '@ant-design/icons';
 import { useAuthStore } from '../../store/authStore';
 
@@ -38,6 +39,7 @@ const navItems = [
     { key: '/', icon: <HomeOutlined />, label: 'Dashboard' },
     { key: '/schedule', icon: <CalendarOutlined />, label: 'Schedule' },
     { key: '/data', icon: <DatabaseOutlined />, label: 'Data' },
+    { key: '/worksheet/create', icon: <FileAddOutlined />, label: 'Create worksheet' },
 ];
 
 /**
