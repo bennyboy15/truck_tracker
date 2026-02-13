@@ -1,6 +1,6 @@
-import {z} from "zod";
+import { z } from "zod";
 
 export const customerSchema = z.object({
-  email: z.email("Invalid email format"),
-  password: z.string().min(6, "Password must be at least 6 characters"),
+  name: z.string().trim().min(1, "Name is required"),
+  email: z.string().email("Invalid email format").optional().or(z.literal("")),
 });

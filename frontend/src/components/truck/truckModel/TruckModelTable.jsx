@@ -1,12 +1,15 @@
 import React from 'react';
-import { Table, Card, Typography, Alert } from 'antd';
+import { Table, Card, Typography, Alert, Button, Popconfirm } from 'antd';
+import { DeleteOutlined } from '@ant-design/icons';
 import axiosInstance from '../../../utils/axios';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import toast from 'react-hot-toast';
+
 const { Title } = Typography;
 
 function TruckModelTable() {
+    const queryClient = useQueryClient();
 
-    // GET ALL TRUCK MODELS
     const { isPending, error, data: truckModels } = useQuery({
         queryKey: ['truckModels'],
         queryFn: async () => {
@@ -15,7 +18,19 @@ function TruckModelTable() {
         }
     });
 
-    const truckMakeColumns = [
+    const { mutate: deleteTruckModel } = useMutation({
+        mutationFn: async (id) => {
+            const { data } = await axiosInstance.delete(`/truck_model/${id}`);
+            return data;
+        },
+        onSuccess: () => {
+            toast.success("Truck model deleted");
+            queryClient.invalidateQueries({ queryKey: ['truckModels'] });
+        },
+        onError: (err) => toast.error(err.response?.data?.message || err.message),
+    });
+
+    const truckModelColumns = [
         {
             title: 'Model Name',
             dataIndex: 'name',
@@ -31,22 +46,36 @@ function TruckModelTable() {
             title: 'Make',
             dataIndex: 'make',
             key: 'make',
-            render: (make) => {
-                return make?.name || 'N/A';
-            },
+            render: (make) => make?.name || 'N/A',
+        },
+        {
+            title: 'Actions',
+            key: 'actions',
+            width: 80,
+            render: (_, record) => (
+                <Popconfirm
+                    title="Delete this model?"
+                    onConfirm={() => deleteTruckModel(record._id)}
+                    okText="Yes"
+                    cancelText="No"
+                >
+                    <Button type="text" danger icon={<DeleteOutlined />} />
+                </Popconfirm>
+            ),
         },
     ];
 
-    if (error) return <Alert title="Error" description={error.message} type="error" showIcon />;
+    if (error) return <Alert message="Error" description={error.message} type="error" showIcon />;
 
     return (
         <Card>
-            <Title level={2}>Truck Models</Title>
+            <Title level={4}>Truck Models</Title>
             <Table
                 dataSource={truckModels}
-                columns={truckMakeColumns}
+                columns={truckModelColumns}
                 loading={isPending}
-                rowKey="category"
+                rowKey="_id"
+                pagination={{ pageSize: 10 }}
             />
         </Card>
     )

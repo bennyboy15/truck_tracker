@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import path from "path";
 import { connectDB } from "./db/connectDB.js";
 import authRoutes from "./routes/auth.route.js";
+import customerRoutes from "./routes/customer.route.js";
 import technicianRoutes from "./routes/technician.route.js";
 import truckRoutes from "./routes/truck.route.js";
 import truckMakeRoutes from "./routes/truckMake.route.js";
@@ -24,6 +25,7 @@ app.use(cookieParser()); // allows us to parse incoming cookies
 
 // -- ROUTES --
 app.use("/api/auth", authRoutes);
+app.use("/api/customer", customerRoutes);
 app.use("/api/technician", technicianRoutes);
 app.use("/api/truck", truckRoutes);
 app.use("/api/truck_make", truckMakeRoutes);
